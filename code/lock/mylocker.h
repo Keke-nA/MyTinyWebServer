@@ -59,7 +59,7 @@ class MyLocker {
 class MyCond {
    public:
     MyCond() {
-        pthread_cond_init(&my_cond, NULL);
+        pthread_cond_init(&my_cond, nullptr);
     }
     ~MyCond() {
         pthread_cond_destroy(&my_cond);
@@ -69,16 +69,16 @@ class MyCond {
     MyCond& operator=(MyCond&&) = delete;
 
     bool myWait(pthread_mutex_t* mymutex) {
-        return pthread_cond_wait(&my_cond, mymutex);
+        return pthread_cond_wait(&my_cond, mymutex) == 0;
     }
     bool myTimeWait(pthread_mutex_t* mymutex, const timespec tm) {
-        return pthread_cond_timedwait(&my_cond, mymutex, &tm);
+        return pthread_cond_timedwait(&my_cond, mymutex, &tm) == 0;
     }
     bool mySignal() {
-        pthread_cond_signal(&my_cond);
+        return pthread_cond_signal(&my_cond) == 0;
     }
     bool myBroadcast() {
-        pthread_cond_broadcast(&my_cond);
+        return pthread_cond_broadcast(&my_cond) == 0;
     }
 
    private:
