@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <chrono>
 #include <functional>
 #include <unordered_map>
@@ -13,6 +14,7 @@ using ms = std::chrono::milliseconds;
 // 定时器节点类，代表一个定时器任务
 class TimerNode {
    public:
+    TimerNode(size_t id, timestamp expires, timeOutCallBack cb) : id(id), expires(expires), cb(cb) {}
     // 定时器节点的唯一标识符
     size_t id;
     // 定时器的过期时间点
@@ -43,7 +45,7 @@ class HeapTimer {
     // 移除堆顶的定时器节点
     void pop();
     // 获取下一个定时器任务的剩余时间
-    size_t getNextTick();
+    int getNextTick();
 
    private:
     // 删除指定索引的定时器节点
@@ -51,12 +53,12 @@ class HeapTimer {
     // 向上调整堆，确保堆的性质
     void siftUp(size_t i);
     // 向下调整堆，确保堆的性质
-    void siftDown(size_t i, size_t n);
+    bool siftDown(size_t i);
     // 交换两个索引对应的定时器节点
     void swapNode(size_t i, size_t j);
 
     // 存储定时器节点的堆
     std::vector<TimerNode> heap_timer;
     // 存储定时器ID到堆中索引的映射
-    std::unordered_map<size_t, size_t> hear_ref;
+    std::unordered_map<size_t, size_t> heap_ref;
 };
