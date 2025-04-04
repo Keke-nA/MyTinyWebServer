@@ -102,7 +102,8 @@ void Buffer::append(const Buffer& buff) {
 
 // 从文件描述符中读取数据到缓冲区，返回读取的字节数，errno 用于存储错误码
 ssize_t Buffer::readFd(int fd, int* saveerrno) {
-    char buf[32767];
+    //char buf[32767];
+    char buf[65535];
     iovec iv[2];
     iv[0].iov_base = beginWrite();
     iv[0].iov_len = writeableBytes();
