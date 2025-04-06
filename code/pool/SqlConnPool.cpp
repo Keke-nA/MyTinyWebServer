@@ -42,7 +42,6 @@ void SqlConnPool::initConn(const char* host,
         if (!raw_conn) {
             std::cout << "initConn failed!" << std::endl;
             continue;
-            ;
         }
         MYSQL* real_conn = mysql_real_connect(raw_conn, host, user, pwd, dbname, port, nullptr, 0);
         if (!real_conn) {

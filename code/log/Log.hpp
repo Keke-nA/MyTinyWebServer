@@ -1,9 +1,9 @@
 #pragma once
 #include <sys/stat.h>
+#include <sys/time.h>
+#include <time.h>
 #include <cassert>
 #include <cstdarg>
-#include <time.h>
-#include<sys/time.h>
 #include <memory>
 #include <string>
 #include <thread>
@@ -73,3 +73,33 @@ class Log {
     // 日志操作的互斥锁
     std::mutex log_mtx;
 };
+
+// 基础日志宏，根据日志级别和格式写入日志信息并刷新
+#define LOG_BASE(level, format, ...)                     \
+    do {                                                 \
+        Log& log = Log::instance();                      \
+        if (log.isOpen() && log.getLevel() <= level) { \
+            log.write(level, format, ##__VA_ARGS__);    \
+            log.flush();                                \
+        }                                                \
+    } while (0);
+// 调试级别日志宏，调用基础日志宏写入调试日志
+#define LOG_DEBUG(format, ...)             \
+    do {                                   \
+        LOG_BASE(0, format, ##__VA_ARGS__) \
+    } while (0);
+// 信息级别日志宏，调用基础日志宏写入信息日志
+#define LOG_INFO(format, ...)              \
+    do {                                   \
+        LOG_BASE(1, format, ##__VA_ARGS__) \
+    } while (0);
+// 警告级别日志宏，调用基础日志宏写入警告日志
+#define LOG_WARN(format, ...)              \
+    do {                                   \
+        LOG_BASE(2, format, ##__VA_ARGS__) \
+    } while (0);
+// 错误级别日志宏，调用基础日志宏写入错误日志
+#define LOG_ERROR(format, ...)             \
+    do {                                   \
+        LOG_BASE(3, format, ##__VA_ARGS__) \
+    } while (0);
