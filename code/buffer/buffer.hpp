@@ -38,7 +38,7 @@ class Buffer {
     // 将缓冲区中的所有数据读取为一个字符串
     std::string retrieveAllToStr();
     // 获取缓冲区可写位置的常量指针
-    const char* beginWrite() const;
+    const char* beginWriteConst() const;
     // 获取缓冲区可写位置的指针
     char* beginWrite();
     // 向缓冲区追加一个字符串

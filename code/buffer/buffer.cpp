@@ -69,7 +69,7 @@ std::string Buffer::retrieveAllToStr() {
 }
 
 // 获取缓冲区可写位置的常量指针
-const char* Buffer::beginWrite() const {
+const char* Buffer::beginWriteConst() const {
     return buffer.data() + write_pos;
 }
 
