@@ -25,9 +25,15 @@ WebServer::WebServer(int port,
       epoller(make_unique<Epoller>()) {
     // 构造函数逻辑框架（具体实现待补充）
     // 示例：初始化资源目录、数据库连接池、日志系统等
-    src_dir = getcwd(nullptr, 256);
+    /*src_dir = getcwd(nullptr, 256);
     assert(src_dir);
-    strncat(src_dir, "../../resources/", 16);
+    strncat(src_dir, "../../resources/", 17);*/
+    // const char* path = "/home/gao/code/MyTinyWebServer/resources/";
+    // strcpy(src_dir, path);
+    const char* basePath = "/home/gao/code/MyTinyWebServer/resources/";
+    src_dir = new char[strlen(basePath) + 1];  // +1 用于存放字符串结束符 '\0'
+    strcpy(src_dir, basePath);                 // 深拷贝字符串
+    std::cout << src_dir << std::endl;
     HttpConn::user_count = 0;
     HttpConn::src_dir = src_dir;
     SqlConnPool::instance().initConn("localhost", sqlport, sqluser, sqlpwd, dbname, connpollnum);
@@ -75,6 +81,7 @@ void WebServer::start() {
             timems = heap_timer->getNextTick();
         }
         int eventcnt = epoller->wait(timems);
+        std::cout << "WebServer::start() eventcnt:" << eventcnt << std::endl;
         for (int i = 0; i < eventcnt; i++) {
             int fd = epoller->getEventFd(i);
             size_t events = epoller->getEvents(i);

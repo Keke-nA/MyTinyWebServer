@@ -119,8 +119,10 @@ bool HeapTimer::siftDown(size_t i) {
         if (heap_timer[i].expires > heap_timer[j].expires) {
             swapNode(i, j);
             i = j;
+            j = i * 2 + 1;
+        } else {
+            break;  // 如果不需要交换，跳出循环
         }
-        j = i * 2 + 1;
     }
     return raw_i > i;
 }
