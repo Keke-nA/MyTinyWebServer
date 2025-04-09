@@ -11,7 +11,6 @@
 #include "../buffer/Buffer.hpp"
 #include "../log/Log.hpp"
 
-const 
 
 /**
  * @brief HTTP响应处理类

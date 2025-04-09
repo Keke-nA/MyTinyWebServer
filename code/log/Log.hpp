@@ -75,13 +75,13 @@ class Log {
 };
 
 // 基础日志宏，根据日志级别和格式写入日志信息并刷新
-#define LOG_BASE(level, format, ...)                     \
-    do {                                                 \
-        Log& log = Log::instance();                      \
+#define LOG_BASE(level, format, ...)                   \
+    do {                                               \
+        Log& log = Log::instance();                    \
         if (log.isOpen() && log.getLevel() <= level) { \
-            log.write(level, format, ##__VA_ARGS__);    \
-            log.flush();                                \
-        }                                                \
+            log.write(level, format, ##__VA_ARGS__);   \
+            log.flush();                               \
+        }                                              \
     } while (0);
 // 调试级别日志宏，调用基础日志宏写入调试日志
 #define LOG_DEBUG(format, ...)             \

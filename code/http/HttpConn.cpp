@@ -63,6 +63,7 @@ ssize_t HttpConn::httpcnWrite(int* saveerror) {
             httpcn_write_buff.retrieve(len);
         }
     } while (is_et || toWriteBytes() > 10240);
+    return len;
 }
 
 // 关闭连接函数
