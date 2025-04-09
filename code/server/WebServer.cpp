@@ -27,7 +27,7 @@ WebServer::WebServer(int port,
     // 示例：初始化资源目录、数据库连接池、日志系统等
     src_dir = getcwd(nullptr, 256);
     assert(src_dir);
-    strncat(src_dir, "/resources/", 16);
+    strncat(src_dir, "../../resources/", 16);
     HttpConn::user_count = 0;
     HttpConn::src_dir = src_dir;
     SqlConnPool::instance().initConn("localhost", sqlport, sqluser, sqlpwd, dbname, connpollnum);
