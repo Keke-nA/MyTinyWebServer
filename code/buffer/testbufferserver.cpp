@@ -7,7 +7,7 @@
 #include <cerrno>   // 定义 errno 相关常量
 #include <cstring>  // 声明 strerror 函数
 #include <iostream>
-#include "buffer.hpp"  // 你的 Buffer 类头文件
+#include "Buffer.hpp"  // 你的 Buffer 类头文件
 
 #define MAX_EVENTS 10
 #define PORT 8888

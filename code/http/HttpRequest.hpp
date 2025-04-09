@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include "../buffer/buffer.hpp"
+#include "../buffer/Buffer.hpp"
 #include "../log/Log.hpp"
 #include "../pool/SqlConnRAII.hpp"
 

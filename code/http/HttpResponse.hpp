@@ -8,7 +8,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "../buffer/buffer.hpp"
+#include "../buffer/Buffer.hpp"
 #include "../log/Log.hpp"
 
 const 

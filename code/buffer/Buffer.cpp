@@ -1,4 +1,4 @@
-#include "buffer.hpp"
+#include "Buffer.hpp"
 
 // 构造函数
 Buffer::Buffer(size_t initbuffersize) : write_pos(0), read_pos(0), buffer(initbuffersize) {

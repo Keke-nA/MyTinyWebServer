@@ -241,12 +241,11 @@ bool HttpRequest::userVerify(const std::string& name, const std::string& pwd, bo
     snprintf(order, 256, "SELECT username, password FROM user WHERE username ='%s' LIMIT 1", name.c_str());
     LOG_DEBUG("%s", order);
     if (mysql_query(sql, order)) {
-        mysql_free_result(res);
         return false;
     }
     res = mysql_store_result(sql);
     j = mysql_num_fields(res);
-    fields = mysql_fetch_field(res);
+    fields = mysql_fetch_fields(res);
     while (MYSQL_ROW row = mysql_fetch_row(res)) {
         LOG_DEBUG("MYSQL ROW: %s %s", row[0], row[1]);
         std::string password(row[1]);
@@ -271,8 +270,9 @@ bool HttpRequest::userVerify(const std::string& name, const std::string& pwd, bo
         if (mysql_query(sql, order)) {
             LOG_DEBUG("Insert error!");
             flag = false;
+        } else {
+            flag = true;
         }
-        flag = true;
     }
     SqlConnPool::instance().freeConn(sql);
     LOG_DEBUG("UserVerify success!");

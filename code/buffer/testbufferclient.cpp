@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <cstring>
-#include "buffer.hpp"
+#include "Buffer.hpp"
 #include <arpa/inet.h> // 添加此行
 
 #define SERVER_IP "127.0.0.1"

@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 #include <thread>
-#include "../buffer/buffer.hpp"
+#include "../buffer/Buffer.hpp"
 #include "BlockDeque.hpp"
 
 // 日志类的定义
