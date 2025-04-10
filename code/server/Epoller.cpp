@@ -54,7 +54,7 @@ int Epoller::wait(int timeoutms) {
 
 // 获取第 i 个事件对应的文件描述符
 int Epoller::getEventFd(size_t i) const {
-    std::cout << "getEventFd called with index: " << i << ", events.size(): " << events.size() << std::endl;
+    //std::cout << "getEventFd called with index: " << i << ", events.size(): " << events.size() << std::endl;
     // 待实现
     assert(i < events.size() && i >= 0);
     return events[i].data.fd;

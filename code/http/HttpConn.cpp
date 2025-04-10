@@ -24,7 +24,7 @@ void HttpConn::httpcnInit(int sockfd, const sockaddr_in& addr) {
     httpcn_read_buff.retrieveAll();
     httpcn_write_buff.retrieveAll();
     httpcn_isclose = false;
-    LOG_INFO("Client[%d](%s:%d) in, userCount:%d", httpcn_fd, getIp(), getPort(), static_cast<int>(user_count));
+    LOG_INFO("HttpConn.cpp: 27     Client[%d](%s:%d) in, userCount:%d", httpcn_fd, getIp(), getPort(), static_cast<int>(user_count));
 }
 
 // 读取数据函数
@@ -74,7 +74,7 @@ void HttpConn::httpcnClose() {
         httpcn_isclose = true;
         user_count--;
         close(httpcn_fd);
-        LOG_INFO("Client[%d](%s:%d) quit, UserCount:%d", httpcn_fd, getIp(), getPort(), static_cast<int>(user_count));
+        LOG_INFO("HttpConn.cpp: 77     Client[%d](%s:%d) quit, UserCount:%d", httpcn_fd, getIp(), getPort(), static_cast<int>(user_count));
     }
 }
 
@@ -109,7 +109,7 @@ bool HttpConn::process() {
     if (httpcn_read_buff.readableBytes() <= 0) {
         return false;
     } else if (httpcn_request.parse(httpcn_read_buff)) {
-        LOG_DEBUG("%s", httpcn_request.path().c_str());
+        LOG_DEBUG("HttpConn.cpp: 112     %s", httpcn_request.path().c_str());
         httpcn_response.res_init(src_dir, httpcn_request.path(), httpcn_request.isKeepAlive(), 200);
     } else {
         httpcn_response.res_init(src_dir, httpcn_request.path(), false, 400);
@@ -124,7 +124,7 @@ bool HttpConn::process() {
         httpcn_iovec[1].iov_len = httpcn_response.fileLen();
         httpcn_iocnt = 2;
     }
-    LOG_DEBUG("filesize:%d, %d to %d", httpcn_response.fileLen(), httpcn_iocnt, toWriteBytes());
+    LOG_DEBUG("HttpConn.cpp: 127     filesize:%d, %d to %d", httpcn_response.fileLen(), httpcn_iocnt, toWriteBytes());
     return true;
 }
 

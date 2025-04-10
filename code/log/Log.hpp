@@ -4,6 +4,7 @@
 #include <time.h>
 #include <cassert>
 #include <cstdarg>
+#include <iostream>
 #include <memory>
 #include <string>
 #include <thread>

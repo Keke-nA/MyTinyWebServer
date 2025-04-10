@@ -32,7 +32,8 @@ void Log::init(size_t level, const char* path, const char* suffix, int maxqueuec
     log_path = path;
     log_suffix = suffix;
     char filename[LOG_NAME_LEN]{0};
-    snprintf(filename, LOG_NAME_LEN - 1, "%s/%04d_%02d_%02d%s", log_path, t.tm_year, t.tm_mon, t.tm_mday, log_suffix);
+    snprintf(filename, LOG_NAME_LEN - 1, "%s/%04d_%02d_%02d%s", log_path, t.tm_year + 1900, t.tm_mon + 1, t.tm_mday,
+             log_suffix);
     log_today = t.tm_mday;
     {
         std::lock_guard<std::mutex> lock(log_mtx);
@@ -89,12 +90,16 @@ void Log::write(size_t level, const char* format, ...) {
         va_start(valist, format);
         int m = vsnprintf(log_buff.beginWrite(), log_buff.writeableBytes(), format, valist);
         va_end(valist);
+        log_buff.hasWritten(m);
 
-        log_buff.append("\n\0", 2);
+        // log_buff.append("\n\0", 2);
+        log_buff.append("\n", 1);
+
         if (is_async && log_deque && !log_deque->full()) {
             log_deque->push_back(log_buff.retrieveAllToStr());
         } else {
-            fputs(log_buff.peek(), log_fp);
+            // fputs(log_buff.peek(), log_fp);
+            fwrite(log_buff.peek(), 1, log_buff.readableBytes(), log_fp);
         }
         log_buff.retrieveAll();
     }
@@ -150,16 +155,16 @@ Log::~Log() {
 void Log::appendLogLevelTitle(size_t level) {
     switch (level) {
         case 0:
-            log_buff.append("[debug]:", 9);
+            log_buff.append("[debug] : ", 10);
             break;
         case 1:
-            log_buff.append("[info]:", 9);
+            log_buff.append("[info] : ", 9);
             break;
         case 2:
             log_buff.append("[warn] : ", 9);
             break;
         case 3:
-            log_buff.append("[error]: ", 9);
+            log_buff.append("[error] : ", 10);
             break;
         default:
             log_buff.append("[info] : ", 9);

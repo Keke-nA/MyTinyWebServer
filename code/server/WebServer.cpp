@@ -30,10 +30,10 @@ WebServer::WebServer(int port,
     strncat(src_dir, "../../resources/", 17);*/
     // const char* path = "/home/gao/code/MyTinyWebServer/resources/";
     // strcpy(src_dir, path);
-    const char* basePath = "/home/gao/code/MyTinyWebServer/resources/";
+    const char* basePath = "/home/gao/code/MyTinyWebServer/resources";
     src_dir = new char[strlen(basePath) + 1];  // +1 用于存放字符串结束符 '\0'
     strcpy(src_dir, basePath);                 // 深拷贝字符串
-    std::cout << src_dir << std::endl;
+    //std::cout << src_dir << std::endl;
     HttpConn::user_count = 0;
     HttpConn::src_dir = src_dir;
     SqlConnPool::instance().initConn("localhost", sqlport, sqluser, sqlpwd, dbname, connpollnum);
@@ -45,15 +45,15 @@ WebServer::WebServer(int port,
         Log::instance().init(loglevel, "./log", ".log", logquesize);
     }
     if (is_close) {
-        LOG_ERROR("==========Server init error==========");
+        LOG_ERROR("WebServer.cpp: 48     ==========Server init error==========");
     } else {
-        LOG_INFO("==========Server init==========");
-        LOG_INFO("Port: %d, OpenLinger: %s", port, optlinger ? true : false);
-        LOG_INFO("Listen Mode: %s, OpenConn Mode: %s", (listen_event & EPOLLET ? "ET" : "LT"),
+        LOG_INFO("WebServer.cpp: 50     ==========Server init==========");
+        LOG_INFO("WebServer.cpp: 51     Port: %d, OpenLinger: %s", port, optlinger ? true : false);
+        LOG_INFO("WebServer.cpp: 52     Listen Mode: %s, OpenConn Mode: %s", (listen_event & EPOLLET ? "ET" : "LT"),
                  (conn_event & EPOLLET ? "ET" : "LT"));
-        LOG_INFO("LogSys level: %d", loglevel);
-        LOG_INFO("srcdir: %s", HttpConn::src_dir);
-        LOG_INFO("SqlConnPool num: %d, ThreadPool num: %d", connpollnum, threadnum);
+        LOG_INFO("WebServer.cpp: 54     LogSys level: %d", loglevel);
+        LOG_INFO("WebServer.cpp: 55     srcdir: %s", HttpConn::src_dir);
+        LOG_INFO("WebServer.cpp: 56     SqlConnPool num: %d, ThreadPool num: %d", connpollnum, threadnum);
     }
 }
 
@@ -74,21 +74,27 @@ WebServer::~WebServer() {
 void WebServer::start() {
     int timems = -1;
     if (!is_close) {
-        LOG_INFO("==========Server start==========");
+        LOG_INFO("WebServer.cpp: 77     ==========Server start==========");
     }
     while (!is_close) {
         if (timeout_ms > 0) {
             timems = heap_timer->getNextTick();
         }
+        //std::cout << "WebServer:83" << std::endl;
         int eventcnt = epoller->wait(timems);
-        std::cout << "WebServer::start() eventcnt:" << eventcnt << std::endl;
+        //std::cout << "WebServer:85  " << eventcnt << std::endl;
+        // std::cout << "WebServer::start() eventcnt:" << eventcnt << std::endl;
         for (int i = 0; i < eventcnt; i++) {
             int fd = epoller->getEventFd(i);
             size_t events = epoller->getEvents(i);
             if (fd == listen_fd) {
+                //std::cout << "WebServer:91" << std::endl;
                 dealListen();
             } else if (events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
                 assert(users.count(fd) > 0);
+                //std::cout << "WebServer.cpp:92  " << events << " " << EPOLLRDHUP << " " << EPOLLHUP << " " << EPOLLERR
+                 //         << std::endl;
+                //std::cout << "Closing connection for fd: " << fd << std::endl;
                 closeConn(&users[fd]);
             } else if (events & EPOLLIN) {
                 assert(users.count(fd) > 0);
@@ -97,7 +103,7 @@ void WebServer::start() {
                 assert(users.count(fd) > 0);
                 dealWrite(&users[fd]);
             } else {
-                LOG_ERROR("Unexpected event!");
+                LOG_ERROR("WebServer.cpp: 100     Unexpected event!");
             }
         }
     }
@@ -122,35 +128,35 @@ bool WebServer::initSocket() {
     }
     listen_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (listen_fd < 0) {
-        LOG_ERROR("Create socket error! port: %d", ws_port);
+        LOG_ERROR("WebServer.cpp: 125     Create socket error! port: %d", ws_port);
         return false;
     }
     ret = setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, (const void*)&optlinger, sizeof(int));
     if (ret == -1) {
-        LOG_ERROR("set socket setsockopt error!");
+        LOG_ERROR("WebServer.cpp: 130     set socket setsockopt error!");
         close(listen_fd);
         return false;
     }
     ret = bind(listen_fd, (struct sockaddr*)&addr, sizeof(addr));
     if (ret < 0) {
-        LOG_ERROR("Bind Port: %d error!", ws_port);
+        LOG_ERROR("WebServer.cpp: 136     Bind Port: %d error!", ws_port);
         close(listen_fd);
         return false;
     }
     ret = listen(listen_fd, 6);
     if (ret < 0) {
-        LOG_ERROR("Listen port: %d error!", ws_port);
+        LOG_ERROR("WebServer.cpp: 142     Listen port: %d error!", ws_port);
         close(listen_fd);
         return false;
     }
     ret = epoller->addFd(listen_fd, listen_event | EPOLLIN);
     if (ret < 0) {
-        LOG_ERROR("Add listen fd to epoll error!");
+        LOG_ERROR("WebServer.cpp: 148     Add listen fd to epoll error!");
         close(listen_fd);
         return false;
     }
     setFdNonBlock(listen_fd);
-    LOG_INFO("Server Port: %d", ws_port);
+    LOG_INFO("WebServer.cpp: 153     Server Port: %d", ws_port);
     return true;
 }
 
@@ -186,11 +192,12 @@ void WebServer::addClient(int fd, sockaddr_in addr) {
     assert(fd > 0);
     users[fd].httpcnInit(fd, addr);
     if (timeout_ms > 0) {
+        //std::cout << "WebServer.cpp : 189  " << timeout_ms << std::endl;
         heap_timer->addTimeNode(fd, timeout_ms, std::bind(&WebServer::closeConn, this, &users[fd]));
     }
     epoller->addFd(fd, EPOLLIN | conn_event);
     setFdNonBlock(fd);
-    LOG_INFO("Client[%d] in", users[fd].getFd());
+    LOG_INFO("WebServer.cpp: 193     Client[%d] in", users[fd].getFd());
 }
 
 // 处理监听套接字事件（私有成员函数）
@@ -205,7 +212,7 @@ void WebServer::dealListen() {
         }
         if (HttpConn::user_count >= MAX_FD) {
             sendError(fd, "Server busy!");
-            LOG_WARN("Client is full!");
+            LOG_WARN("WebServer.cpp: 208     Client is full!");
             return;
         }
         addClient(fd, addr);
@@ -234,7 +241,7 @@ void WebServer::sendError(int fd, const char* info) {
     assert(fd > 0);
     int ret = send(fd, info, strlen(info), 0);
     if (ret < 0) {
-        LOG_WARN("send error to client[%d] error!", fd);
+        LOG_WARN("WebServer.cpp: 237     send error to client[%d] error!", fd);
     }
     close(fd);
 }
@@ -253,7 +260,8 @@ void WebServer::closeConn(HttpConn* client) {
     // 实现框架（待补充：从 epoll/定时器中移除连接，释放资源）
     assert(client);
     int fd = client->getFd();
-    LOG_INFO("Client[%d] quit!", fd);
+    //std::cout << "Closing connection for user with fd: " << fd << std::endl;
+    LOG_INFO("WebServer.cpp: 256     Client[%d] quit!", fd);
     epoller->delDf(fd);
     client->httpcnClose();
 }
@@ -266,6 +274,7 @@ void WebServer::onRead(HttpConn* client) {
     int readerror = 0;
     ret = client->httpcnRead(&readerror);
     if (ret <= 0 && readerror != EAGAIN) {
+        //std::cout << "WebServer.cpp : 270  " << ret << "  " << readerror << std::endl;
         closeConn(client);
         return;
     }
@@ -290,6 +299,7 @@ void WebServer::onWrite(HttpConn* client) {
             return;
         }
     }
+    //std::cout << "WebServer.cpp: 295  " << ret << "  " << writeerror << std::endl;
     closeConn(client);
 }
 

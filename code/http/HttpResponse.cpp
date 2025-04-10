@@ -8,7 +8,7 @@ const std::unordered_map<std::string, std::string> HttpResponse::SUFFIX_TYPE = {
     {".jpg", "image/jpeg"},          {".jpeg", "image/jpeg"},       {".au", "audio/basic"},
     {".mpeg", "video/mpeg"},         {".mpg", "video/mpeg"},        {".avi", "video/x-msvideo"},
     {".gz", "application/x-gzip"},   {".tar", "application/x-tar"}, {".css", "text/css "},
-    {".js", "text/javascript "},
+    {".js", "text/javascript "},     {".ico", "image/x - icon"}  // 添加.ico对应的MIME类型
 };
 
 const std::unordered_map<int, std::string> HttpResponse::CODE_STATUS = {
@@ -152,7 +152,7 @@ void HttpResponse::addContent(Buffer& buff) {
         errorContent(buff, "File NotFount!");
         return;
     }
-    LOG_DEBUG("file path %s", (http_src_dir + http_path).data());
+    LOG_DEBUG("HttpResponse.cpp: 151     file path %s", (http_src_dir + http_path).data());
     int* mmret = (int*)mmap(0, http_mmfile_stat.st_size, PROT_READ, MAP_PRIVATE, srcfd, 0);
     if (*mmret == -1) {
         errorContent(buff, "File NotFound!");
