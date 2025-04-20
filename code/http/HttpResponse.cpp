@@ -137,7 +137,7 @@ void HttpResponse::addHeader(Buffer& buff) {
         buff.append("keep-alive\r\n");
         buff.append("keep-alive: max=6, timeout=120\r\n");
     } else {
-        buff.append("clode\r\n");
+        buff.append("close\r\n");
     }
     buff.append("Content-type: " + getFileType() + "\r\n");
 }
