@@ -30,7 +30,7 @@ WebServer::WebServer(int port,
     strncat(src_dir, "../../resources/", 17);*/
     // const char* path = "/home/gao/code/MyTinyWebServer/resources/";
     // strcpy(src_dir, path);
-    const char* basePath = "/home/gao/code/MyTinyWebServer/resources";
+    const char* basePath = "/root/Code/MyTinyWebServer/resources";
     src_dir = new char[strlen(basePath) + 1];  // +1 用于存放字符串结束符 '\0'
     strcpy(src_dir, basePath);                 // 深拷贝字符串
     //std::cout << src_dir << std::endl;
