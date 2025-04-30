@@ -1,17 +1,14 @@
 #pragma once
 
-#include <algorithm>
 #include <cstring>
-#include <regex>
+
+#include "../buffer/Buffer.hpp"
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include "../buffer/Buffer.hpp"
-#include "../log/Log.hpp"
-#include "../pool/SqlConnRAII.hpp"
 
 class HttpRequest {
-   public:
+  public:
     enum class PARSE_STATE { REQUEST_LINE, HEADERS, BODY, FINISH };
     enum class HTTP_CODE {
         NO_REQUEST,
@@ -35,14 +32,15 @@ class HttpRequest {
     std::string getPost(const char* key) const;
     bool isKeepAlive() const;
 
-   private:
+  private:
     bool parseRequestLine(const std::string& line);
     void parseHeader(const std::string& line);
     void parseBody(const std::string& line);
     void parsePath();
     void parsePost();
     void parseFromUrlEncoded();
-    static bool userVerify(const std::string& name, const std::string& pwd, bool islogin);
+    static bool
+    userVerify(const std::string& name, const std::string& pwd, bool islogin);
     static int converHex(char ch);
     PARSE_STATE httprq_state;
     std::string httprq_method;

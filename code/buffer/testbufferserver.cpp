@@ -86,7 +86,7 @@ int main() {
                 }
 
                 // 初始化客户端缓冲区
-                client_buffers[conn_fd] = Buffer(4096);
+                client_buffers[conn_fd] = std::move(Buffer(4096));
 
                 event.events = EPOLLIN | EPOLLET;
                 event.data.fd = conn_fd;
