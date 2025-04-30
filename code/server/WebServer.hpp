@@ -1,5 +1,12 @@
 #pragma once
 
+#include "../http/HttpConn.hpp"
+#include "../log/Log.hpp"
+#include "../pool/SqlConnPool.hpp"
+#include "../pool/SqlConnRAII.hpp"
+#include "../pool/threadpool.hpp"
+#include "../timer/HeapTimer.hpp"
+#include "Epoller.hpp"
 #include <arpa/inet.h>
 #include <assert.h>
 #include <errno.h>
@@ -8,33 +15,27 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <unordered_map>
-#include "../http/HttpConn.hpp"
-#include "../log/Log.hpp"
-#include "../pool/SqlConnPool.hpp"
-#include "../pool/SqlConnRAII.hpp"
-#include "../pool/threadpool.hpp"
-#include "../timer/HeapTimer.hpp"
-#include "Epoller.hpp"
 
 class WebServer {
-   public:
-    WebServer(int port,
-              int trigmode,
-              int timeoutms,
-              bool optlinger,
-              int sqlport,
-              const char* sqluser,
-              const char* sqlpwd,
-              const char* dbname,
-              int connpollnum,
-              int threadnum,
-              bool openlog,
-              int loglevel,
-              int logquesize);
+  public:
+    WebServer(
+        int port,
+        int trigmode,
+        int timeoutms,
+        bool optlinger,
+        int sqlport,
+        const char* sqluser,
+        const char* sqlpwd,
+        const char* dbname,
+        int connpollnum,
+        int threadnum,
+        bool openlog,
+        int loglevel,
+        int logquesize);
     ~WebServer();
     void start();
 
-   private:
+  private:
     bool initSocket();
     void initEventMode(int trigmode);
     void addClient(int fd, sockaddr_in addr);
