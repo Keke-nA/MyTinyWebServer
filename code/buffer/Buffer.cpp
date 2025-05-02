@@ -1,8 +1,8 @@
 #include "Buffer.hpp"
 
-// 构造函数
-Buffer::Buffer(size_t initbuffersize) : write_pos(0), read_pos(0), buffer(initbuffersize) {
-    // 这里实现构造函数的逻辑
+// 构造函数，初始化缓冲区
+Buffer::Buffer(size_t initbuffersize)
+    : write_pos(0), read_pos(0), buffer(initbuffersize) {
 }
 
 // 获取缓冲区可写的字节数
@@ -28,6 +28,7 @@ const char* Buffer::peek() const {
 // 确保缓冲区有足够的空间来写入指定长度的数据
 void Buffer::ensureWriteable(size_t len) {
     if (buffer.size() - write_pos < len) {
+        // 空间不足，需要扩展
         makeSpace(len);
     }
 }
@@ -63,7 +64,9 @@ void Buffer::retrieveAll() {
 
 // 将缓冲区中的所有数据读取为一个字符串
 std::string Buffer::retrieveAllToStr() {
+    // 创建一个包含所有可读数据的字符串
     std::string temp(peek(), readableBytes());
+    // 重置缓冲区
     retrieveAll();
     return std::move(temp);
 }
@@ -85,8 +88,11 @@ void Buffer::append(const std::string& str) {
 
 // 向缓冲区追加一个指定长度的字符数组
 void Buffer::append(const char* str, size_t len) {
+    // 确保有足够空间
     ensureWriteable(len);
+    // 复制数据
     std::copy(str, str + len, beginWrite());
+    // 更新写入位置
     hasWritten(len);
 }
 
@@ -100,35 +106,46 @@ void Buffer::append(const Buffer& buff) {
     append(buff.peek(), buff.readableBytes());
 }
 
-// 从文件描述符中读取数据到缓冲区，返回读取的字节数，errno 用于存储错误码
+// 从文件描述符中读取数据到缓冲区
 ssize_t Buffer::readFd(int fd, int* saveerrno) {
-    //char buf[32767];
     char buf[65535];
+    // 准备两个缓冲区：一个是当前Buffer对象的可写区域，一个是栈上的临时缓冲区
     iovec iv[2];
     iv[0].iov_base = beginWrite();
     iv[0].iov_len = writeableBytes();
     iv[1].iov_base = buf;
     iv[1].iov_len = sizeof(buf);
+
+    // 使用readv一次性读取数据到两个缓冲区
     const ssize_t rlen = readv(fd, iv, 2);
+
     if (rlen < 0) {
+        // 读取出错
         *saveerrno = errno;
     } else if (static_cast<size_t>(rlen) <= writeableBytes()) {
+        // 数据全部读入Buffer对象的可写区域
         hasWritten(rlen);
     } else {
+        // 数据部分读入Buffer对象，部分读入栈上临时缓冲区
         int rawwriteable = writeableBytes();
         hasWritten(rawwriteable);
+        // 将栈上临时缓冲区的数据追加到Buffer对象
         append(buf, rlen - rawwriteable);
     }
     return rlen;
 }
 
-// 将缓冲区中的数据写入到文件描述符，返回写入的字节数，errno 用于存储错误码
+// 将缓冲区中的数据写入到文件描述符
 ssize_t Buffer::writeFd(int fd, int* saveerrno) {
     size_t readsize = readableBytes();
+    // 将可读数据写入文件描述符
     const ssize_t wlen = write(fd, peek(), readsize);
+
     if (wlen < 0) {
+        // 写入出错
         *saveerrno = errno;
     } else {
+        // 更新已读位置
         hasRead(wlen);
     }
     return wlen;
@@ -148,11 +165,17 @@ const char* Buffer::beginPtr() const {
 void Buffer::makeSpace(size_t len) {
     size_t left = prependableBytes();
     size_t right = writeableBytes();
+
     if (left + right >= len) {
-        std::copy(buffer.begin() + read_pos, buffer.begin() + write_pos, buffer.begin());
+        // 通过移动数据来腾出空间
+        std::copy(
+            buffer.begin() + read_pos,
+            buffer.begin() + write_pos,
+            buffer.begin());
         write_pos -= read_pos;
         read_pos = 0;
     } else {
+        // 空间不足，需要扩展缓冲区
         buffer.resize(write_pos + len);
     }
 }

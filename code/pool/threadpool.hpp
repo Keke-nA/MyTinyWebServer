@@ -5,10 +5,11 @@
 #include <functional>
 #include <mutex>
 #include <queue>
+#include <stdexcept>
 #include <thread>
 
 class ThreadPool {
-   public:
+  public:
     ThreadPool(const size_t threadpoolsize = 8)
         : thread_pool(std::make_shared<Pool>()) {
         for (size_t i = 0; i < threadpoolsize; i++)
@@ -16,11 +17,13 @@ class ThreadPool {
                 std::unique_lock<std::mutex> lock(temp_pool->pool_mtx);
                 while (true) {
                     // 改进：防止虚假唤醒
-                    while (!temp_pool->pool_is_closed && temp_pool->pool_tasks.empty()) {
+                    while (!temp_pool->pool_is_closed
+                           && temp_pool->pool_tasks.empty()) {
                         temp_pool->pool_cv.wait(lock);
                     }
 
-                    if (temp_pool->pool_is_closed && temp_pool->pool_tasks.empty()) {
+                    if (temp_pool->pool_is_closed
+                        && temp_pool->pool_tasks.empty()) {
                         break;
                     }
 
@@ -43,8 +46,7 @@ class ThreadPool {
         thread_pool->pool_cv.notify_all();
     }
 
-    template <typename T>
-    void addTask(T&& task) {
+    template <typename T> void addTask(T&& task) {
         {
             std::lock_guard<std::mutex> lock(thread_pool->pool_mtx);
             if (thread_pool->pool_is_closed) {
@@ -55,11 +57,11 @@ class ThreadPool {
         thread_pool->pool_cv.notify_all();
     }
 
-   private:
+  private:
     class Pool {
-       public:
-        Pool()
-            : pool_is_closed(false) {}
+      public:
+        Pool() : pool_is_closed(false) {
+        }
         std::mutex pool_mtx;
         std::condition_variable pool_cv;
         std::atomic_bool pool_is_closed;

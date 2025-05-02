@@ -1,0 +1,377 @@
+2025_05_01 02:59:14.067734[info] : WebServer.cpp: 50     ==========Server init==========
+2025_05_01 02:59:14.068045[info] : WebServer.cpp: 51     Port: 5005, OpenLinger: (null)
+2025_05_01 02:59:14.068063[info] : WebServer.cpp: 52     Listen Mode: ET, OpenConn Mode: ET
+2025_05_01 02:59:14.068069[info] : WebServer.cpp: 54     LogSys level: 1
+2025_05_01 02:59:14.068074[info] : WebServer.cpp: 55     srcdir: /root/Code/MyTinyWebServer/resources
+2025_05_01 02:59:14.068078[info] : WebServer.cpp: 56     SqlConnPool num: 12, ThreadPool num: 6
+2025_05_01 02:59:14.068083[info] : WebServer.cpp: 77     ==========Server start==========
+2025_05_01 02:59:21.729659[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62038) in, userCount:1
+2025_05_01 02:59:21.729941[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:21.737921[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62085) in, userCount:2
+2025_05_01 02:59:21.738089[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 02:59:21.769654[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:21.769959[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62038) quit, UserCount:1
+2025_05_01 02:59:21.816715[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62084) in, userCount:2
+2025_05_01 02:59:21.816867[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:21.817225[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62027) in, userCount:3
+2025_05_01 02:59:21.817331[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:21.817394[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62010) in, userCount:4
+2025_05_01 02:59:21.817414[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:21.820196[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62046) in, userCount:5
+2025_05_01 02:59:21.820327[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:21.833144[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62026) in, userCount:6
+2025_05_01 02:59:21.833265[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:21.869867[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:21.870099[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62084) quit, UserCount:5
+2025_05_01 02:59:21.880509[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:21.880770[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62046) quit, UserCount:4
+2025_05_01 02:59:21.957539[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:21.957824[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62027) quit, UserCount:3
+2025_05_01 02:59:21.957943[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 02:59:21.958067[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62085) quit, UserCount:2
+2025_05_01 02:59:21.981862[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:21.982136[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62010) quit, UserCount:1
+2025_05_01 02:59:21.990011[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62014) in, userCount:2
+2025_05_01 02:59:21.990262[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:21.992706[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62019) in, userCount:3
+2025_05_01 02:59:21.992870[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 02:59:21.992936[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62087) in, userCount:4
+2025_05_01 02:59:21.992952[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:21.996295[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62075) in, userCount:5
+2025_05_01 02:59:21.996428[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:22.006296[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:22.006683[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62026) quit, UserCount:4
+2025_05_01 02:59:22.009739[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62074) in, userCount:5
+2025_05_01 02:59:22.010081[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:22.019262[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62100) in, userCount:6
+2025_05_01 02:59:22.019451[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:22.043133[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:22.044764[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62075) quit, UserCount:5
+2025_05_01 02:59:22.044979[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:22.045204[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62074) quit, UserCount:4
+2025_05_01 02:59:22.058211[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:22.058521[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62100) quit, UserCount:3
+2025_05_01 02:59:22.072727[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62007) in, userCount:4
+2025_05_01 02:59:22.073007[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:22.082420[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 02:59:22.082958[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62019) quit, UserCount:3
+2025_05_01 02:59:22.083061[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:22.083213[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62087) quit, UserCount:2
+2025_05_01 02:59:22.087508[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:22.087858[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62014) quit, UserCount:1
+2025_05_01 02:59:22.108086[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:22.108381[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62007) quit, UserCount:0
+2025_05_01 02:59:22.455945[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62023) in, userCount:1
+2025_05_01 02:59:22.456215[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:22.552454[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:22.552750[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62023) quit, UserCount:0
+2025_05_01 02:59:28.206798[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62110) in, userCount:1
+2025_05_01 02:59:28.206986[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:28.306771[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62101) in, userCount:2
+2025_05_01 02:59:28.306961[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 02:59:28.321748[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:28.322040[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62110) quit, UserCount:1
+2025_05_01 02:59:28.356240[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62013) in, userCount:2
+2025_05_01 02:59:28.356863[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:28.357027[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62017) in, userCount:3
+2025_05_01 02:59:28.357074[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:28.357089[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62065) in, userCount:4
+2025_05_01 02:59:28.357104[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:28.369778[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62102) in, userCount:5
+2025_05_01 02:59:28.369929[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:28.371497[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62050) in, userCount:6
+2025_05_01 02:59:28.371605[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:28.406740[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:28.407030[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62017) quit, UserCount:5
+2025_05_01 02:59:28.413758[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:28.414008[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62102) quit, UserCount:4
+2025_05_01 02:59:28.437006[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62025) in, userCount:5
+2025_05_01 02:59:28.437151[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:28.446913[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:28.447087[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62065) quit, UserCount:4
+2025_05_01 02:59:28.447116[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62020) in, userCount:5
+2025_05_01 02:59:28.447134[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:28.477642[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62098) in, userCount:6
+2025_05_01 02:59:28.477922[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:28.486338[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:28.486664[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62013) quit, UserCount:5
+2025_05_01 02:59:28.486713[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 02:59:28.487115[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62101) quit, UserCount:4
+2025_05_01 02:59:28.497503[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:28.497780[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62050) quit, UserCount:3
+2025_05_01 02:59:28.507338[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62052) in, userCount:4
+2025_05_01 02:59:28.507492[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:28.517912[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62058) in, userCount:5
+2025_05_01 02:59:28.518052[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 02:59:28.526553[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:28.526832[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62020) quit, UserCount:4
+2025_05_01 02:59:28.526969[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:28.527048[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62098) quit, UserCount:3
+2025_05_01 02:59:28.527277[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62055) in, userCount:4
+2025_05_01 02:59:28.527379[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:28.546789[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62047) in, userCount:5
+2025_05_01 02:59:28.546983[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:28.556715[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:28.557049[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62025) quit, UserCount:4
+2025_05_01 02:59:28.558137[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 02:59:28.558371[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62058) quit, UserCount:3
+2025_05_01 02:59:28.558425[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62053) in, userCount:4
+2025_05_01 02:59:28.558444[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 02:59:28.562649[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:28.562981[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62055) quit, UserCount:3
+2025_05_01 02:59:28.572325[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:28.572625[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62052) quit, UserCount:2
+2025_05_01 02:59:28.587556[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:28.588075[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62047) quit, UserCount:1
+2025_05_01 02:59:34.831561[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62114) in, userCount:2
+2025_05_01 02:59:34.831684[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:34.871757[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 02:59:34.872090[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62114) quit, UserCount:1
+2025_05_01 02:59:34.901613[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62021) in, userCount:2
+2025_05_01 02:59:34.901777[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 02:59:34.911972[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62005) in, userCount:3
+2025_05_01 02:59:34.912085[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:34.912100[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62006) in, userCount:4
+2025_05_01 02:59:34.912115[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:34.912696[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62108) in, userCount:5
+2025_05_01 02:59:34.912770[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:34.913001[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62093) in, userCount:6
+2025_05_01 02:59:34.913036[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:34.951653[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:34.952019[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62005) quit, UserCount:5
+2025_05_01 02:59:34.962507[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:34.962787[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62108) quit, UserCount:4
+2025_05_01 02:59:34.980236[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62015) in, userCount:5
+2025_05_01 02:59:34.980434[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:34.980480[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62069) in, userCount:6
+2025_05_01 02:59:34.980494[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:34.980518[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:34.980588[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62006) quit, UserCount:5
+2025_05_01 02:59:34.999987[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62103) in, userCount:6
+2025_05_01 02:59:35.000102[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:35.001594[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:35.001837[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62093) quit, UserCount:5
+2025_05_01 02:59:35.027504[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62070) in, userCount:6
+2025_05_01 02:59:35.027724[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:35.075191[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:35.075463[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62069) quit, UserCount:5
+2025_05_01 02:59:35.087678[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:35.087972[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62015) quit, UserCount:4
+2025_05_01 02:59:35.102288[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:35.102580[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62103) quit, UserCount:3
+2025_05_01 02:59:35.106331[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62074) in, userCount:4
+2025_05_01 02:59:35.106586[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:35.111819[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62063) in, userCount:5
+2025_05_01 02:59:35.111953[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:35.130032[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:35.130484[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62070) quit, UserCount:4
+2025_05_01 02:59:35.131414[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62011) in, userCount:5
+2025_05_01 02:59:35.131591[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:35.159192[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62088) in, userCount:6
+2025_05_01 02:59:35.159342[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:35.206403[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:35.206754[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62011) quit, UserCount:5
+2025_05_01 02:59:35.216179[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:35.216664[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62074) quit, UserCount:4
+2025_05_01 02:59:35.225612[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62058) in, userCount:5
+2025_05_01 02:59:35.225794[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 02:59:35.239106[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62040) in, userCount:6
+2025_05_01 02:59:35.239281[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:35.249355[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:35.249677[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62063) quit, UserCount:5
+2025_05_01 02:59:35.263991[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:35.264287[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62088) quit, UserCount:4
+2025_05_01 02:59:35.275347[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62064) in, userCount:5
+2025_05_01 02:59:35.275594[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 02:59:35.276252[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:35.276487[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62040) quit, UserCount:4
+2025_05_01 02:59:35.284902[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62039) in, userCount:5
+2025_05_01 02:59:35.285078[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 02:59:35.299809[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62059) in, userCount:6
+2025_05_01 02:59:35.299954[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 02:59:35.302742[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 02:59:35.302968[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62058) quit, UserCount:5
+2025_05_01 02:59:35.310072[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 02:59:35.310360[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62064) quit, UserCount:4
+2025_05_01 02:59:35.319572[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 02:59:35.319968[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62039) quit, UserCount:3
+2025_05_01 02:59:35.390102[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 02:59:35.390430[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62059) quit, UserCount:2
+2025_05_01 03:00:09.998102[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:00:09.999770[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62053) quit, UserCount:1
+2025_05_01 03:00:14.701343[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:00:14.701582[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62021) quit, UserCount:0
+2025_05_01 03:00:14.905974[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62028) in, userCount:1
+2025_05_01 03:00:14.906209[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:00:14.908315[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62104) in, userCount:2
+2025_05_01 03:00:14.908500[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:00:14.966199[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:00:14.966616[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62028) quit, UserCount:1
+2025_05_01 03:00:14.987208[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62048) in, userCount:2
+2025_05_01 03:00:14.987289[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:00:14.991102[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62100) in, userCount:3
+2025_05_01 03:00:14.991282[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:00:14.992016[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62061) in, userCount:4
+2025_05_01 03:00:14.992099[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:00:14.993070[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62075) in, userCount:5
+2025_05_01 03:00:14.993182[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 03:00:14.996956[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62097) in, userCount:6
+2025_05_01 03:00:14.997288[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:00:15.044090[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:00:15.044482[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62100) quit, UserCount:5
+2025_05_01 03:00:15.058004[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:00:15.058287[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62075) quit, UserCount:4
+2025_05_01 03:00:15.079475[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62107) in, userCount:5
+2025_05_01 03:00:15.079619[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:00:15.081911[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:00:15.082143[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62097) quit, UserCount:4
+2025_05_01 03:00:15.098022[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62054) in, userCount:5
+2025_05_01 03:00:15.098360[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 03:00:15.152130[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:00:15.152472[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62061) quit, UserCount:4
+2025_05_01 03:00:15.152663[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:00:15.152806[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62048) quit, UserCount:3
+2025_05_01 03:00:15.157402[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62016) in, userCount:4
+2025_05_01 03:00:15.157599[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:00:15.168422[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:00:15.168764[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62104) quit, UserCount:3
+2025_05_01 03:00:15.196413[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62049) in, userCount:4
+2025_05_01 03:00:15.196570[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:00:15.196999[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62022) in, userCount:5
+2025_05_01 03:00:15.197050[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:00:15.227628[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62024) in, userCount:6
+2025_05_01 03:00:15.227787[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:00:15.254610[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:00:15.254919[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62107) quit, UserCount:5
+2025_05_01 03:00:15.267917[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:00:15.268284[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62054) quit, UserCount:4
+2025_05_01 03:00:15.268369[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:00:15.268651[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62024) quit, UserCount:3
+2025_05_01 03:00:15.279764[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62029) in, userCount:4
+2025_05_01 03:00:15.279918[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:00:15.289931[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:00:15.290321[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62049) quit, UserCount:3
+2025_05_01 03:00:15.294344[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:00:15.294652[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62016) quit, UserCount:2
+2025_05_01 03:00:15.297297[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62098) in, userCount:3
+2025_05_01 03:00:15.297572[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:00:15.297705[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62077) in, userCount:4
+2025_05_01 03:00:15.297740[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:00:15.310707[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62050) in, userCount:5
+2025_05_01 03:00:15.310949[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 03:00:15.319810[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:00:15.320025[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62022) quit, UserCount:4
+2025_05_01 03:00:15.321732[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62111) in, userCount:5
+2025_05_01 03:00:15.321839[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:00:15.337423[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62064) in, userCount:6
+2025_05_01 03:00:15.337572[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:00:15.347690[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:00:15.347928[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62077) quit, UserCount:5
+2025_05_01 03:00:15.350196[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:00:15.350486[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62029) quit, UserCount:4
+2025_05_01 03:00:15.352240[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:00:15.352474[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62050) quit, UserCount:3
+2025_05_01 03:00:15.354572[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:00:15.354796[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62111) quit, UserCount:2
+2025_05_01 03:00:15.422102[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:00:15.422402[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62098) quit, UserCount:1
+2025_05_01 03:00:15.434942[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:00:15.435305[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62064) quit, UserCount:0
+2025_05_01 03:01:15.349440[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:01:15.349869[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:01:15.349995[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:01:15.350011[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:01:15.365103[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:18.523764[info] : WebServer.cpp: 50     ==========Server init==========
+2025_05_01 03:03:18.523786[info] : WebServer.cpp: 51     Port: 5005, OpenLinger: (null)
+2025_05_01 03:03:18.523792[info] : WebServer.cpp: 52     Listen Mode: ET, OpenConn Mode: ET
+2025_05_01 03:03:18.523797[info] : WebServer.cpp: 54     LogSys level: 1
+2025_05_01 03:03:18.523821[info] : WebServer.cpp: 55     srcdir: /root/Code/MyTinyWebServer/resources
+2025_05_01 03:03:18.523827[info] : WebServer.cpp: 56     SqlConnPool num: 12, ThreadPool num: 10
+2025_05_01 03:03:18.523832[info] : WebServer.cpp: 77     ==========Server start==========
+2025_05_01 03:03:23.111811[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62090) in, userCount:1
+2025_05_01 03:03:23.111986[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:03:23.116567[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62013) in, userCount:2
+2025_05_01 03:03:23.116655[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:03:23.159631[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:23.159928[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62090) quit, UserCount:1
+2025_05_01 03:03:23.197755[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62087) in, userCount:2
+2025_05_01 03:03:23.198178[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:03:23.206849[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62091) in, userCount:3
+2025_05_01 03:03:23.207014[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:03:23.207078[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62008) in, userCount:4
+2025_05_01 03:03:23.207096[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:03:23.208057[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62043) in, userCount:5
+2025_05_01 03:03:23.208388[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 03:03:23.211274[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62026) in, userCount:6
+2025_05_01 03:03:23.211383[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:03:23.261862[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:03:23.262131[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62091) quit, UserCount:5
+2025_05_01 03:03:23.272858[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:03:23.273125[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62026) quit, UserCount:4
+2025_05_01 03:03:23.276422[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:03:23.276682[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62008) quit, UserCount:3
+2025_05_01 03:03:23.297544[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62115) in, userCount:4
+2025_05_01 03:03:23.297703[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:03:23.321694[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62044) in, userCount:5
+2025_05_01 03:03:23.321864[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:03:23.322437[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62054) in, userCount:6
+2025_05_01 03:03:23.322557[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:03:23.331088[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:03:23.331380[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62013) quit, UserCount:5
+2025_05_01 03:03:23.342473[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:23.342717[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62087) quit, UserCount:4
+2025_05_01 03:03:23.372250[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62103) in, userCount:5
+2025_05_01 03:03:23.372497[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:03:23.393129[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62056) in, userCount:6
+2025_05_01 03:03:23.393320[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:03:23.397236[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:03:23.397613[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62043) quit, UserCount:5
+2025_05_01 03:03:23.438788[info] : HttpConn.cpp: 27     Client[29](180.98.192.1:62102) in, userCount:6
+2025_05_01 03:03:23.438951[info] : WebServer.cpp: 193     Client[29] in
+2025_05_01 03:03:23.494841[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:03:23.495196[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62044) quit, UserCount:5
+2025_05_01 03:03:23.495678[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:03:23.495828[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62115) quit, UserCount:4
+2025_05_01 03:03:23.495861[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:03:23.495932[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62054) quit, UserCount:3
+2025_05_01 03:03:23.506812[info] : HttpConn.cpp: 27     Client[27](180.98.192.1:62020) in, userCount:4
+2025_05_01 03:03:23.507447[info] : WebServer.cpp: 193     Client[27] in
+2025_05_01 03:03:23.507657[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62014) in, userCount:5
+2025_05_01 03:03:23.507712[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:03:23.507748[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:23.507855[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62103) quit, UserCount:4
+2025_05_01 03:03:23.539521[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62060) in, userCount:5
+2025_05_01 03:03:23.539717[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:03:23.662090[info] : HttpConn.cpp: 27     Client[30](180.98.192.1:62012) in, userCount:6
+2025_05_01 03:03:23.662262[info] : WebServer.cpp: 193     Client[30] in
+2025_05_01 03:03:23.662303[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:03:23.662407[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62014) quit, UserCount:5
+2025_05_01 03:03:23.662425[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:03:23.662468[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62056) quit, UserCount:4
+2025_05_01 03:03:23.665033[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:03:23.665591[info] : HttpConn.cpp: 77     Client[29](180.98.192.1:62102) quit, UserCount:3
+2025_05_01 03:03:23.689255[info] : HttpConn.cpp: 27     Client[26](180.98.192.1:62100) in, userCount:4
+2025_05_01 03:03:23.689398[info] : WebServer.cpp: 193     Client[26] in
+2025_05_01 03:03:23.692062[info] : HttpConn.cpp: 27     Client[28](180.98.192.1:62022) in, userCount:5
+2025_05_01 03:03:23.692187[info] : WebServer.cpp: 193     Client[28] in
+2025_05_01 03:03:23.694123[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:03:23.694414[info] : HttpConn.cpp: 77     Client[27](180.98.192.1:62020) quit, UserCount:4
+2025_05_01 03:03:23.694603[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:23.694710[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62060) quit, UserCount:3
+2025_05_01 03:03:23.697216[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:03:23.697644[info] : HttpConn.cpp: 77     Client[30](180.98.192.1:62012) quit, UserCount:2
+2025_05_01 03:03:23.721296[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:03:23.721659[info] : HttpConn.cpp: 77     Client[26](180.98.192.1:62100) quit, UserCount:1
+2025_05_01 03:03:23.797229[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:03:23.798416[info] : HttpConn.cpp: 77     Client[28](180.98.192.1:62022) quit, UserCount:0
+2025_05_01 03:03:23.828425[info] : HttpConn.cpp: 27     Client[20](180.98.192.1:62009) in, userCount:1
+2025_05_01 03:03:23.828680[info] : WebServer.cpp: 193     Client[20] in
+2025_05_01 03:03:23.913467[info] : WebServer.cpp: 256     Client[20] quit!
+2025_05_01 03:03:23.913655[info] : HttpConn.cpp: 77     Client[20](180.98.192.1:62009) quit, UserCount:0
+2025_05_01 03:04:23.551569[info] : WebServer.cpp: 256     Client[29] quit!
+2025_05_01 03:04:23.551767[info] : WebServer.cpp: 256     Client[27] quit!
+2025_05_01 03:04:23.672204[info] : WebServer.cpp: 256     Client[30] quit!
+2025_05_01 03:04:23.693409[info] : WebServer.cpp: 256     Client[26] quit!
+2025_05_01 03:04:23.760981[info] : WebServer.cpp: 256     Client[28] quit!
+2025_05_01 03:04:23.883191[info] : WebServer.cpp: 256     Client[20] quit!

@@ -1,105 +1,120 @@
-#include "WebServer.hpp"  // 假设头文件名为 WebServer.hpp
-
-using namespace std;
+#include "WebServer.hpp" // 假设头文件名为 WebServer.hpp
+#include "../log/Log.hpp"
+#include "../pool/SqlConnPool.hpp"
+#include <errno.h>
 
 // 构造函数实现框架（使用成员初始化列表）
-WebServer::WebServer(int port,
-                     int trigmode,
-                     int timeoutms,
-                     bool optlinger,
-                     int sqlport,
-                     const char* sqluser,
-                     const char* sqlpwd,
-                     const char* dbname,
-                     int connpollnum,
-                     int threadnum,
-                     bool openlog,
-                     int loglevel,
-                     int logquesize)
-    : ws_port(port),
-      open_linger(optlinger),
-      timeout_ms(timeoutms),
-      is_close(false),
-      heap_timer(make_unique<HeapTimer>()),
-      thread_pool(make_unique<ThreadPool>(threadnum)),
-      epoller(make_unique<Epoller>()) {
-    // 构造函数逻辑框架（具体实现待补充）
-    // 示例：初始化资源目录、数据库连接池、日志系统等
-    /*src_dir = getcwd(nullptr, 256);
-    assert(src_dir);
-    strncat(src_dir, "../../resources/", 17);*/
-    // const char* path = "/home/gao/code/MyTinyWebServer/resources/";
-    // strcpy(src_dir, path);
+WebServer::WebServer(
+    int port,
+    int trigmode,
+    int timeoutms,
+    bool optlinger,
+    int sqlport,
+    const char* sqluser,
+    const char* sqlpwd,
+    const char* dbname,
+    int connpollnum,
+    int threadnum,
+    bool openlog,
+    int loglevel,
+    int logquesize)
+    : ws_port(port), open_linger(optlinger), timeout_ms(timeoutms),
+      is_close(false), heap_timer(std::make_unique<HeapTimer>()),
+      thread_pool(std::make_unique<ThreadPool>(threadnum)),
+      epoller(std::make_unique<Epoller>()) {
+    // 设置服务器资源目录路径
     const char* basePath = "/root/Code/MyTinyWebServer/resources";
-    src_dir = new char[strlen(basePath) + 1];  // +1 用于存放字符串结束符 '\0'
-    strcpy(src_dir, basePath);                 // 深拷贝字符串
-    //std::cout << src_dir << std::endl;
-    HttpConn::user_count = 0;
-    HttpConn::src_dir = src_dir;
-    SqlConnPool::instance().initConn("localhost", sqlport, sqluser, sqlpwd, dbname, connpollnum);
+    src_dir = new char[std::strlen(basePath) + 1];
+    std::strcpy(src_dir, basePath);
+
+    // 初始化Http连接相关静态成员变量
+    HttpConn::user_count = 0;    // 当前连接用户数
+    HttpConn::src_dir = src_dir; // 静态资源目录
+
+    // 初始化数据库连接池，便于后续高效复用数据库连接
+    SqlConnPool::instance()
+        .initConn("localhost", sqlport, sqluser, sqlpwd, dbname, connpollnum);
+
+    // 设置epoll事件触发模式（ET/LT等）
     initEventMode(trigmode);
+
+    // 初始化监听套接字，若失败则标记服务器关闭
     if (!initSocket()) {
         is_close = true;
     }
+
+    // 初始化日志系统（异步/同步、日志等级、队列大小等）
     if (openlog) {
         Log::instance().init(loglevel, "./log", ".log", logquesize);
     }
+
+    // 根据初始化结果输出日志
     if (is_close) {
-        LOG_ERROR("WebServer.cpp: 48     ==========Server init error==========");
+        LOG_ERROR(
+            "WebServer.cpp: 48     ==========Server init error==========");
     } else {
         LOG_INFO("WebServer.cpp: 50     ==========Server init==========");
-        LOG_INFO("WebServer.cpp: 51     Port: %d, OpenLinger: %s", port, optlinger ? true : false);
-        LOG_INFO("WebServer.cpp: 52     Listen Mode: %s, OpenConn Mode: %s", (listen_event & EPOLLET ? "ET" : "LT"),
-                 (conn_event & EPOLLET ? "ET" : "LT"));
+        LOG_INFO(
+            "WebServer.cpp: 51     Port: %d, OpenLinger: %s",
+            port,
+            optlinger ? true : false);
+        LOG_INFO(
+            "WebServer.cpp: 52     Listen Mode: %s, OpenConn Mode: %s",
+            (listen_event & EPOLLET ? "ET" : "LT"),
+            (conn_event & EPOLLET ? "ET" : "LT"));
         LOG_INFO("WebServer.cpp: 54     LogSys level: %d", loglevel);
         LOG_INFO("WebServer.cpp: 55     srcdir: %s", HttpConn::src_dir);
-        LOG_INFO("WebServer.cpp: 56     SqlConnPool num: %d, ThreadPool num: %d", connpollnum, threadnum);
+        LOG_INFO(
+            "WebServer.cpp: 56     SqlConnPool num: %d, ThreadPool num: %d",
+            connpollnum,
+            threadnum);
     }
 }
 
-// 析构函数实现框架
+// 析构函数：释放所有分配的资源，确保无内存泄漏
 WebServer::~WebServer() {
-    // 析构函数逻辑框架（释放资源）
+    // 关闭监听套接字
     if (listen_fd > 0) {
         close(listen_fd);
     }
     is_close = true;
+    // 释放资源目录字符串
     if (src_dir) {
         free(src_dir);
     }
+    // 关闭数据库连接池
     SqlConnPool::instance().closePool();
-    // 示例：关闭数据库连接池、清理定时器等
 }
 
+// 启动主循环，负责事件分发和处理
 void WebServer::start() {
     int timems = -1;
     if (!is_close) {
         LOG_INFO("WebServer.cpp: 77     ==========Server start==========");
     }
     while (!is_close) {
+        // 获取下一个定时任务的超时时间（用于连接超时管理）
         if (timeout_ms > 0) {
             timems = heap_timer->getNextTick();
         }
-        //std::cout << "WebServer:83" << std::endl;
+        // 等待epoll事件，返回就绪事件数量
         int eventcnt = epoller->wait(timems);
-        //std::cout << "WebServer:85  " << eventcnt << std::endl;
-        // std::cout << "WebServer::start() eventcnt:" << eventcnt << std::endl;
         for (int i = 0; i < eventcnt; i++) {
             int fd = epoller->getEventFd(i);
             size_t events = epoller->getEvents(i);
             if (fd == listen_fd) {
-                //std::cout << "WebServer:91" << std::endl;
+                // 有新客户端连接到来
                 dealListen();
             } else if (events & (EPOLLRDHUP | EPOLLHUP | EPOLLERR)) {
+                // 客户端异常断开或出错
                 assert(users.count(fd) > 0);
-                //std::cout << "WebServer.cpp:92  " << events << " " << EPOLLRDHUP << " " << EPOLLHUP << " " << EPOLLERR
-                 //         << std::endl;
-                //std::cout << "Closing connection for fd: " << fd << std::endl;
                 closeConn(&users[fd]);
             } else if (events & EPOLLIN) {
+                // 客户端有数据可读
                 assert(users.count(fd) > 0);
                 dealRead(&users[fd]);
             } else if (events & EPOLLOUT) {
+                // 客户端有数据可写
                 assert(users.count(fd) > 0);
                 dealWrite(&users[fd]);
             } else {
@@ -109,11 +124,11 @@ void WebServer::start() {
     }
 }
 
-// 初始化监听套接字（私有成员函数）
+// 初始化监听套接字，绑定端口并加入epoll
 bool WebServer::initSocket() {
-    // 实现框架（待补充：socket()/bind()/listen() 等系统调用）
     int ret;
     struct sockaddr_in addr;
+    // 检查端口合法性
     if (ws_port > 65535 || ws_port < 1024) {
         LOG_ERROR("Port: %d error!", ws_port);
         return false;
@@ -121,68 +136,93 @@ bool WebServer::initSocket() {
     addr.sin_family = AF_INET;
     addr.sin_port = htons(ws_port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    struct linger optlinger{};
+
+    struct linger optlinger {};
     if (open_linger) {
+        // 设置优雅关闭，延迟关闭连接
         optlinger.l_onoff = 1;
         optlinger.l_linger = 1;
     }
+
+    // 创建socket文件描述符
     listen_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (listen_fd < 0) {
-        LOG_ERROR("WebServer.cpp: 125     Create socket error! port: %d", ws_port);
+        LOG_ERROR(
+            "WebServer.cpp: 125     Create socket error! port: %d",
+            ws_port);
         return false;
     }
-    ret = setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, (const void*)&optlinger, sizeof(int));
+
+    // 设置端口复用，避免TIME_WAIT导致的端口占用
+    ret = setsockopt(
+        listen_fd,
+        SOL_SOCKET,
+        SO_REUSEADDR,
+        (const void*)&optlinger,
+        sizeof(int));
     if (ret == -1) {
         LOG_ERROR("WebServer.cpp: 130     set socket setsockopt error!");
         close(listen_fd);
         return false;
     }
+
+    // 绑定本地地址和端口
     ret = bind(listen_fd, (struct sockaddr*)&addr, sizeof(addr));
     if (ret < 0) {
         LOG_ERROR("WebServer.cpp: 136     Bind Port: %d error!", ws_port);
         close(listen_fd);
         return false;
     }
+
+    // 开始监听，最大连接数为6
     ret = listen(listen_fd, 6);
     if (ret < 0) {
         LOG_ERROR("WebServer.cpp: 142     Listen port: %d error!", ws_port);
         close(listen_fd);
         return false;
     }
+
+    // 将监听fd加入epoll监听
     ret = epoller->addFd(listen_fd, listen_event | EPOLLIN);
     if (ret < 0) {
         LOG_ERROR("WebServer.cpp: 148     Add listen fd to epoll error!");
         close(listen_fd);
         return false;
     }
+
+    // 设置监听fd为非阻塞模式
     setFdNonBlock(listen_fd);
     LOG_INFO("WebServer.cpp: 153     Server Port: %d", ws_port);
     return true;
 }
 
-// 初始化事件触发模式（私有成员函数）
+// 初始化epoll事件触发模式（ET/LT/ONESHOT等）
 void WebServer::initEventMode(int trigmode) {
-    // 实现框架（待补充：设置 EPOLLET/LT 模式、EPOLLONESHOT 等）
     listen_event = EPOLLRDHUP;
     conn_event = EPOLLONESHOT | EPOLLRDHUP;
     switch (trigmode) {
-        case 0:
-            break;
-        case 1:
-            conn_event |= EPOLLET;
-            break;
-        case 2:
-            listen_event |= EPOLLET;
-            break;
-        case 3:
-            listen_event |= EPOLLET;
-            conn_event |= EPOLLET;
-            break;
-        default:
-            listen_event |= EPOLLET;
-            conn_event |= EPOLLET;
-            break;
+    case 0:
+        // 默认LT模式
+        break;
+    case 1:
+        // 连接为ET，监听为LT
+        conn_event |= EPOLLET;
+        break;
+    case 2:
+        // 监听为ET，连接为LT
+        listen_event |= EPOLLET;
+        break;
+    case 3:
+        // 监听和连接都为ET
+        listen_event |= EPOLLET;
+        conn_event |= EPOLLET;
+        break;
+    default:
+        listen_event |= EPOLLET;
+        conn_event |= EPOLLET;
+        break;
     }
+    // 设置HttpConn的ET模式标志
     HttpConn::is_et = (conn_event & EPOLLET);
 }
 
@@ -192,8 +232,11 @@ void WebServer::addClient(int fd, sockaddr_in addr) {
     assert(fd > 0);
     users[fd].httpcnInit(fd, addr);
     if (timeout_ms > 0) {
-        //std::cout << "WebServer.cpp : 189  " << timeout_ms << std::endl;
-        heap_timer->addTimeNode(fd, timeout_ms, std::bind(&WebServer::closeConn, this, &users[fd]));
+        // std::cout << "WebServer.cpp : 189  " << timeout_ms << std::endl;
+        heap_timer->addTimeNode(
+            fd,
+            timeout_ms,
+            std::bind(&WebServer::closeConn, this, &users[fd]));
     }
     epoller->addFd(fd, EPOLLIN | conn_event);
     setFdNonBlock(fd);
@@ -260,7 +303,7 @@ void WebServer::closeConn(HttpConn* client) {
     // 实现框架（待补充：从 epoll/定时器中移除连接，释放资源）
     assert(client);
     int fd = client->getFd();
-    //std::cout << "Closing connection for user with fd: " << fd << std::endl;
+    // std::cout << "Closing connection for user with fd: " << fd << std::endl;
     LOG_INFO("WebServer.cpp: 256     Client[%d] quit!", fd);
     epoller->delDf(fd);
     client->httpcnClose();
@@ -274,7 +317,8 @@ void WebServer::onRead(HttpConn* client) {
     int readerror = 0;
     ret = client->httpcnRead(&readerror);
     if (ret <= 0 && readerror != EAGAIN) {
-        //std::cout << "WebServer.cpp : 270  " << ret << "  " << readerror << std::endl;
+        // std::cout << "WebServer.cpp : 270  " << ret << "  " << readerror <<
+        // std::endl;
         closeConn(client);
         return;
     }
@@ -299,7 +343,8 @@ void WebServer::onWrite(HttpConn* client) {
             return;
         }
     }
-    //std::cout << "WebServer.cpp: 295  " << ret << "  " << writeerror << std::endl;
+    // std::cout << "WebServer.cpp: 295  " << ret << "  " << writeerror <<
+    // std::endl;
     closeConn(client);
 }
 
