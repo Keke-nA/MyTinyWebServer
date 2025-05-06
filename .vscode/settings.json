@@ -76,5 +76,6 @@
         "variant": "cpp",
         "unordered_set": "cpp",
         "regex": "cpp"
-    }
+    },
+    "editor.fontSize": 16
 }
